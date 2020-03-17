@@ -91,7 +91,7 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
-	var episodes []bson.M
+	var episodes []Episode
 	if err := cursor.All(ctx, &episodes); err != nil {
 		log.Panic(err)
 	}
@@ -104,7 +104,7 @@ func main() {
 	}
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
-		var episode bson.M
+		var episode Episode
 		if err := cursor.Decode(&episode); err != nil {
 			log.Panic(err)
 		}
@@ -112,7 +112,7 @@ func main() {
 	}
 
 	//Retrieve one document from coll
-	var podcast bson.M
+	var podcast Podcast
 	if err = podcastsCollection.FindOne(ctx, bson.M{}).Decode(&podcast); err != nil {
 		log.Panic(err)
 	}
@@ -123,7 +123,7 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
-	var episodesFiltered []bson.M
+	var episodesFiltered []Episode
 	if err = fliterCursor.All(ctx, &episodesFiltered); err != nil {
 		log.Panic(err)
 	}
@@ -135,7 +135,7 @@ func main() {
 	sortCursor, err := episodesCollection.Find(ctx, bson.D{
 		{"duration", bson.D{{"$gt", 22}}},
 	}, opts)
-	var episodesSorted []bson.M //order doesnt matter
+	var episodesSorted []Episode
 	if err = sortCursor.All(ctx, &episodesSorted); err != nil {
 		log.Panic(err)
 	}
