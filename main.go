@@ -31,7 +31,7 @@ type Episode struct {
 
 func main() {
 	// Mongodb Client
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://user1:user123@cluster0-9tn5d.azure.mongodb.net/test?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://<username>:<password>@cluster0-9tn5d.azure.mongodb.net/test?retryWrites=true&w=majority"))
 	if err != nil {
 		log.Panic(err)
 	}
